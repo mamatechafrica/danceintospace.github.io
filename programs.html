@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs - Dance Into Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --primary: #6F0114; --secondary: #262B76; }
+    .text-primary { color: var(--primary) !important; }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white fixed w-full z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <a href="/">
+            <img src="images/logo.jpeg" alt="Logo" class="h-12 sm:h-16 w-auto">
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+          <a href="/" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Home</a>
+          <a href="/blog.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Blog</a>
+          <a href="/updates.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Updates</a>
+          <a href="/gallery.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Gallery</a>
+          <a href="/programs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Programs</a>
+          <a href="/dance-center.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Dance Center</a>
+          <a href="/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">FAQs</a>
+        </div>
+        <div class="md:hidden">
+          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Home</a>
+        <a href="/blog.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Blog</a>
+        <a href="/updates.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Updates</a>
+        <a href="/gallery.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Gallery</a>
+        <a href="/programs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Programs</a>
+        <a href="/dance-center.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Dance Center</a>
+        <a href="/faqs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">FAQs</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="h-16"></div>
+
+  <!-- Programs Section -->
+  <section class="py-12 sm:py-16 px-4" style="background-color: #ACA9BB;">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-primary">Community Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        
+        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
+          <img src="images/duet4.png" alt="Breaking Barriers" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+            <h3 class="font-semibold text-white text-lg">Breaking Barriers</h3>
+            <p class="text-sm text-white mt-2">Is a mixed ability dance and SRHR outreaches project in partnership with Amplify Change.</p>
+          </div>
+        </div>
+        
+        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
+          <img src="images/corruption.jpg" alt="Jukumu Letu" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+            <h3 class="font-semibold text-white text-lg">Jukumu Letu</h3>
+            <p class="text-sm text-white mt-2">Interactive Media Outreach Project in partnership with CRE-CO</p>
+          </div>
+        </div>
+        
+        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
+          <img src="images/man-ball.png" alt="Dance Meets Roots" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+            <h3 class="font-semibold text-white text-lg">Dance Meets Roots</h3>
+            <p class="text-sm text-white mt-2">Intercultural contemporary dance decentralization project</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Database Programs -->
+  <section class="py-12 sm:py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-primary">Our Programs</h2>
+      <div id="db-programs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <p class="col-span-full text-gray-600 text-center">Loading programs...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-sm" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadPrograms() {
+      const { data } = await supabase.from('programs').select('*').order('created_at', { ascending: false });
+      const container = document.getElementById('db-programs');
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-gray-600 text-center">No programs yet.</p>';
+        return;
+      }
+      container.innerHTML = data.map(program => `
+        <div class="flex flex-col items-center">
+          <div class="w-full h-40 sm:h-48 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('${program.image || 'images/sex education.jpeg'}');"></div>
+          <div class="w-full sm:w-64 bg-white -mt-8 sm:-mt-10 shadow-lg rounded-lg overflow-hidden">
+            <div class="py-3 text-center font-bold text-gray-800">${program.title || 'Untitled'}</div>
+            <div class="py-2 px-3 bg-gray-100 text-center">
+              <span class="bg-gray-400 text-xs px-4 py-2 rounded uppercase font-bold text-black">Learn more</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPrograms);
+  </script>
+</body>
+</html>

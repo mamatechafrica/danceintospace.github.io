@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updates - Dance Into Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --primary: #6F0114; --secondary: #262B76; }
+    .text-primary { color: var(--primary) !important; }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white fixed w-full z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <a href="/">
+            <img src="images/logo.jpeg" alt="Logo" class="h-12 sm:h-16 w-auto">
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+          <a href="/" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Home</a>
+          <a href="/blog.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Blog</a>
+          <a href="/updates.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Updates</a>
+          <a href="/gallery.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Gallery</a>
+          <a href="/programs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Programs</a>
+          <a href="/dance-center.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Dance Center</a>
+          <a href="/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">FAQs</a>
+        </div>
+        <div class="md:hidden">
+          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Home</a>
+        <a href="/blog.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Blog</a>
+        <a href="/updates.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Updates</a>
+        <a href="/gallery.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Gallery</a>
+        <a href="/programs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Programs</a>
+        <a href="/dance-center.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Dance Center</a>
+        <a href="/faqs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">FAQs</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="h-16"></div>
+
+  <!-- Coming Soon Hero -->
+  <div class="w-full h-48 sm:h-64 md:h-80 lg:h-96 bg-cover bg-center flex items-end justify-center" style="background-image: url('images/coming_soon.jpg');">
+    <h1 class="text-white font-bold text-3xl sm:text-4xl md:text-5xl mb-8 sm:mb-12">Coming Soon...</h1>
+  </div>
+
+  <!-- Events -->
+  <div class="py-12 sm:py-16" style="background-color: #ACA9BB;">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-primary mb-8">Upcoming Events</h2>
+      <div id="upcoming-events" class="space-y-6 max-w-4xl mx-auto">
+        <p class="text-center text-gray-600">Loading events...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-12 sm:py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-primary mb-8">Past Events</h2>
+      <div id="past-events" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <p class="col-span-full text-center text-gray-600">Loading past events...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-sm" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadUpdates() {
+      const { data } = await supabase.from('updates').select('*').order('event_date', { ascending: false });
+      
+      if (!data || data.length === 0) {
+        document.getElementById('upcoming-events').innerHTML = '<p class="text-center text-gray-600">No upcoming events.</p>';
+        document.getElementById('past-events').innerHTML = '<p class="col-span-full text-center text-gray-600">No past events.</p>';
+        return;
+      }
+
+      const today = new Date();
+      const upcoming = data.filter(u => new Date(u.event_date) >= today);
+      const past = data.filter(u => new Date(u.event_date) < today);
+
+      if (upcoming.length > 0) {
+        document.getElementById('upcoming-events').innerHTML = upcoming.map(update => `
+          <div class="flex flex-col sm:flex-row bg-white rounded-lg overflow-hidden shadow">
+            <div class="sm:w-1/2 h-48 sm:h-auto">
+              <img src="${update.image || 'images/chorus.png'}" alt="" class="w-full h-full object-cover">
+            </div>
+            <div class="sm:w-1/2 p-4 sm:p-6">
+              <h3 class="text-lg sm:text-xl font-bold">${update.title || ''}</h3>
+              <p class="text-sm sm:text-base mt-2">${update.event_date ? new Date(update.event_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''}</p>
+              <p class="text-gray-600 mt-2 text-sm sm:text-base">${update.content || ''}</p>
+              <div class="mt-4 flex gap-2">
+                <button class="px-4 py-2 border border-indigo-900 text-indigo-900 rounded hover:text-white hover:bg-indigo-900 text-sm">LEARN MORE</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('upcoming-events').innerHTML = '<p class="text-center text-gray-600">No upcoming events.</p>';
+      }
+
+      if (past.length > 0) {
+        document.getElementById('past-events').innerHTML = past.map(update => `
+          <div class="flex flex-col">
+            <div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100">
+              <img src="${update.image || 'images/kneeling.jpeg'}" alt="${update.title || ''}" class="object-cover w-full h-48">
+            </div>
+            <div class="mt-4">
+              <h3 class="text-base font-medium text-gray-900">${update.title || ''}</h3>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('past-events').innerHTML = '<p class="col-span-full text-center text-gray-600">No past events.</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadUpdates);
+  </script>
+</body>
+</html>

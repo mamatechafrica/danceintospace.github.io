@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Dance Into Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --primary: #6F0114; --secondary: #262B76; }
+    .text-primary { color: var(--primary) !important; }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white fixed w-full z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <a href="/">
+            <img src="images/logo.jpeg" alt="Logo" class="h-12 sm:h-16 w-auto">
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+          <a href="/" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Home</a>
+          <a href="/blog.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Blog</a>
+          <a href="/updates.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Updates</a>
+          <a href="/gallery.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Gallery</a>
+          <a href="/programs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Programs</a>
+          <a href="/dance-center.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Dance Center</a>
+          <a href="/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">FAQs</a>
+        </div>
+        <div class="md:hidden">
+          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Home</a>
+        <a href="/blog.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Blog</a>
+        <a href="/updates.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Updates</a>
+        <a href="/gallery.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Gallery</a>
+        <a href="/programs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Programs</a>
+        <a href="/dance-center.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Dance Center</a>
+        <a href="/faqs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">FAQs</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="h-16"></div>
+
+  <!-- Gallery Section -->
+  <section class="py-12 sm:py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-primary">Gallery</h2>
+      <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
+        <p class="col-span-full text-gray-600 text-center">Loading gallery...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-sm" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadGallery() {
+      const { data } = await supabase.from('gallery_items').select('*').order('created_at', { ascending: false });
+      const container = document.getElementById('gallery-grid');
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-gray-600 text-center">No gallery items yet.</p>';
+        return;
+      }
+      container.innerHTML = data.map(item => `
+        <div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100">
+          ${item.image ? `<img src="${item.image}" alt="${item.title || ''}" class="object-cover w-full h-full">` : ''}
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadGallery);
+  </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Dance Into Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --primary: #6F0114; --secondary: #262B76; }
+    .text-primary { color: var(--primary) !important; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <!-- Navigation -->
+  <nav class="bg-gray-900 text-white fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center h-14">
+        <h1 class="text-lg font-bold">Admin Dashboard</h1>
+        <a href="/" class="text-sm hover:text-gray-300">← Back to Site</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-14"></div>
+
+  <div class="container mx-auto px-4 py-8">
+    <!-- Login Section -->
+    <div id="login-section" class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 sm:p-8">
+      <h2 class="text-xl sm:text-2xl font-bold mb-6 text-center">Admin Login</h2>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" id="email" required class="w-full p-3 border rounded text-sm sm:text-base">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input type="password" id="password" required class="w-full p-3 border rounded text-sm sm:text-base">
+        </div>
+        <button type="submit" class="w-full bg-purple-900 text-white p-3 rounded hover:bg-purple-800 text-sm sm:text-base">Login</button>
+      </form>
+      <p id="login-error" class="text-red-500 mt-4 text-center text-sm hidden"></p>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+      <!-- Stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <h3 class="text-sm font-bold text-gray-500">Programs</h3>
+          <p id="programs-count" class="text-2xl sm:text-3xl font-bold">0</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <h3 class="text-sm font-bold text-gray-500">Gallery Items</h3>
+          <p id="gallery-count" class="text-2xl sm:text-3xl font-bold">0</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <h3 class="text-sm font-bold text-gray-500">Blog Posts</h3>
+          <p id="blog-count" class="text-2xl sm:text-3xl font-bold">0</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <h3 class="text-sm font-bold text-gray-500">Updates</h3>
+          <p id="updates-count" class="text-2xl sm:text-3xl font-bold">0</p>
+        </div>
+      </div>
+
+      <!-- Content Management -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <h2 class="text-lg sm:text-xl font-bold">Programs</h2>
+            <button onclick="showForm('programs')" class="bg-purple-900 text-white px-3 sm:px-4 py-2 rounded hover:bg-purple-800 text-sm">Add New</button>
+          </div>
+          <div id="programs-list" class="space-y-2 max-h-64 overflow-y-auto"></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <h2 class="text-lg sm:text-xl font-bold">Gallery</h2>
+            <button onclick="showForm('gallery')" class="bg-purple-900 text-white px-3 sm:px-4 py-2 rounded hover:bg-purple-800 text-sm">Add New</button>
+          </div>
+          <div id="gallery-list" class="space-y-2 max-h-64 overflow-y-auto"></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <h2 class="text-lg sm:text-xl font-bold">Blog Posts</h2>
+            <button onclick="showForm('blog')" class="bg-purple-900 text-white px-3 sm:px-4 py-2 rounded hover:bg-purple-800 text-sm">Add New</button>
+          </div>
+          <div id="blog-list" class="space-y-2 max-h-64 overflow-y-auto"></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <h2 class="text-lg sm:text-xl font-bold">Updates</h2>
+            <button onclick="showForm('updates')" class="bg-purple-900 text-white px-3 sm:px-4 py-2 rounded hover:bg-purple-800 text-sm">Add New</button>
+          </div>
+          <div id="updates-list" class="space-y-2 max-h-64 overflow-y-auto"></div>
+        </div>
+      </div>
+
+      <button id="logout-btn" class="mt-8 bg-red-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-red-600 text-sm sm:text-base w-full sm:w-auto">Logout</button>
+    </div>
+
+    <!-- Form Modal -->
+    <div id="form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg p-4 sm:p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <h2 id="form-title" class="text-lg sm:text-xl font-bold mb-4"></h2>
+        <form id="item-form" class="space-y-4"></form>
+        <div class="flex flex-col sm:flex-row gap-2 mt-4">
+          <button type="submit" form="item-form" class="flex-1 bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-800 text-sm sm:text-base">Save</button>
+          <button type="button" onclick="closeForm()" class="flex-1 bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 text-sm sm:text-base">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let currentUser = null;
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorEl = document.getElementById('login-error');
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        errorEl.textContent = error.message;
+        errorEl.classList.remove('hidden');
+      } else {
+        currentUser = data.user;
+        showDashboard();
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      currentUser = null;
+      document.getElementById('login-section').classList.remove('hidden');
+      document.getElementById('dashboard').classList.add('hidden');
+    });
+
+    function showDashboard() {
+      document.getElementById('login-section').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+      loadAllData();
+    }
+
+    async function loadAllData() {
+      const [programs, gallery, blog, updates] = await Promise.all([
+        supabase.from('programs').select('*'),
+        supabase.from('gallery_items').select('*'),
+        supabase.from('blog_posts').select('*'),
+        supabase.from('updates').select('*')
+      ]);
+
+      document.getElementById('programs-count').textContent = programs.data?.length || 0;
+      document.getElementById('gallery-count').textContent = gallery.data?.length || 0;
+      document.getElementById('blog-count').textContent = blog.data?.length || 0;
+      document.getElementById('updates-count').textContent = updates.data?.length || 0;
+
+      renderList('programs-list', programs.data || [], ['title']);
+      renderList('gallery-list', gallery.data || [], ['title', 'category']);
+      renderList('blog-list', blog.data || [], ['title', 'published_at']);
+      renderList('updates-list', updates.data || [], ['title', 'event_date']);
+    }
+
+    function renderList(containerId, data, fields) {
+      const container = document.getElementById(containerId);
+      if (!data.length) {
+        container.innerHTML = '<p class="text-gray-500 text-sm">No items yet</p>';
+        return;
+      }
+      container.innerHTML = data.map(item => `
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 bg-gray-50 rounded gap-2">
+          <div class="flex-1">
+            ${fields.map(f => `<p class="font-medium text-sm sm:text-base truncate">${item[f] || ''}</p>`).join('')}
+          </div>
+          <button onclick="deleteItem('${containerId.replace('-list', '')}', ${item.id})" class="text-red-500 hover:text-red-700 text-sm whitespace-nowrap">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    let currentTable = '';
+    
+    function showForm(table) {
+      currentTable = table;
+      const forms = {
+        programs: {
+          title: 'Add Program',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'content', label: 'Content', type: 'textarea' },
+            { name: 'image', label: 'Image URL', type: 'text' }
+          ]
+        },
+        gallery: {
+          title: 'Add Gallery Item',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image URL', type: 'text' },
+            { name: 'category', label: 'Category', type: 'text' }
+          ]
+        },
+        blog: {
+          title: 'Add Blog Post',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'content', label: 'Content', type: 'textarea' },
+            { name: 'cover_image', label: 'Cover Image URL', type: 'text' },
+            { name: 'slug', label: 'Slug', type: 'text' }
+          ]
+        },
+        updates: {
+          title: 'Add Update',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'content', label: 'Content', type: 'textarea' },
+            { name: 'event_date', label: 'Event Date', type: 'date' },
+            { name: 'location', label: 'Location', type: 'text' }
+          ]
+        }
+      };
+
+      const formConfig = forms[table];
+      document.getElementById('form-title').textContent = formConfig.title;
+      document.getElementById('item-form').innerHTML = formConfig.fields.map(f => `
+        <div>
+          <label class="block text-sm font-medium mb-1">${f.label}</label>
+          ${f.type === 'textarea' 
+            ? `<textarea name="${f.name}" class="w-full p-3 border rounded text-sm" rows="4"></textarea>`
+            : `<input type="${f.type}" name="${f.name}" class="w-full p-3 border rounded text-sm">`
+          }
+        </div>
+      `).join('');
+
+      document.getElementById('item-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        
+        const tableMap = { programs: 'programs', gallery: 'gallery_items', blog: 'blog_posts', updates: 'updates' };
+        
+        await supabase.from(tableMap[table]).insert([data]);
+        closeForm();
+        loadAllData();
+      };
+
+      document.getElementById('form-modal').classList.remove('hidden');
+    }
+
+    function closeForm() {
+      document.getElementById('form-modal').classList.add('hidden');
+    }
+
+    async function deleteItem(table, id) {
+      if (!confirm('Delete this item?')) return;
+      
+      const tableMap = { programs: 'programs', gallery: 'gallery_items', blog: 'blog_posts', updates: 'updates' };
+      await supabase.from(tableMap[table]).delete().eq('id', id);
+      loadAllData();
+    }
+  </script>
+</body>
+</html>

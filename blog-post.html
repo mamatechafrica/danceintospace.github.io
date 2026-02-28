@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post - Dance Into Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --primary: #6F0114; --secondary: #262B76; }
+    .text-primary { color: var(--primary) !important; }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Navigation -->
+  <nav class="bg-white fixed w-full z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <a href="/">
+            <img src="images/logo.jpeg" alt="Logo" class="h-12 sm:h-16 w-auto">
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
+          <a href="/" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Home</a>
+          <a href="/blog.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Blog</a>
+          <a href="/updates.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Updates</a>
+          <a href="/gallery.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Gallery</a>
+          <a href="/programs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Programs</a>
+          <a href="/dance-center.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">Dance Center</a>
+          <a href="/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">FAQs</a>
+        </div>
+        <div class="md:hidden">
+          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Home</a>
+        <a href="/blog.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Blog</a>
+        <a href="/updates.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Updates</a>
+        <a href="/gallery.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Gallery</a>
+        <a href="/programs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Programs</a>
+        <a href="/dance-center.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">Dance Center</a>
+        <a href="/faqs.html" class="block px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded">FAQs</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer -->
+  <div class="h-16"></div>
+
+  <!-- Blog Post Content -->
+  <div class="px-4 sm:px-6 py-12 sm:py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="h-48 sm:h-64 lg:h-80 w-full">
+          <img id="post-image" src="images/default_cover_image.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4 sm:p-8">
+          <h1 id="post-title" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-4">Loading...</h1>
+          <span id="post-date" class="inline-block bg-gray-200 text-sm px-3 py-1 rounded mb-6"></span>
+          <div id="post-content" class="prose max-w-none text-gray-700 text-sm sm:text-base"></div>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/blog.html" class="inline-block bg-secondary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:opacity-90">← Back to Blog</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-sm" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    function getQueryParam(param) {
+      return new URLSearchParams(window.location.search).get(param);
+    }
+
+    async function loadBlogPost() {
+      const slug = getQueryParam('slug');
+      if (!slug) {
+        document.getElementById('post-title').textContent = 'Post not found';
+        return;
+      }
+
+      const { data } = await supabase.from('blog_posts').select('*').eq('slug', slug).single();
+      
+      if (!data) {
+        document.getElementById('post-title').textContent = 'Post not found';
+        return;
+      }
+
+      document.getElementById('post-title').textContent = data.title || '';
+      document.getElementById('post-content').innerHTML = data.content || '';
+      document.getElementById('post-image').src = data.cover_image || 'images/default_cover_image.jpg';
+      
+      if (data.published_at) {
+        const date = new Date(data.published_at);
+        document.getElementById('post-date').textContent = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBlogPost);
+  </script>
+</body>
+</html>
