@@ -31,8 +31,8 @@
           <a href="/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded">FAQs</a>
         </div>
         <div class="md:hidden">
-          <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <button id="mobile-menu-btn" class="p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
       </div>
@@ -80,6 +80,20 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('menu-icon');
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+      } else {
+        icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+      }
+    }
+    
+    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
     const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
