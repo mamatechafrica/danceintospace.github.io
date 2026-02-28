@@ -11,7 +11,7 @@
     .text-primary { color: var(--primary) !important; }
   </style>
 </head>
-<body class="font-sans">
+<body class="font-sans flex flex-col min-h-screen">
   <!-- Navigation -->
   <nav class="bg-white fixed w-full z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4">
@@ -97,9 +97,10 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-100 py-6">
+  <footer class="bg-gray-100 py-6 mt-auto" style="border-top: 2px solid white;">
     <div class="max-w-7xl mx-auto text-center">
-      <p class="text-sm" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+      <p class="text-sm sm:text-base" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
+      <p class="text-xs sm:text-sm" style="text-transform: uppercase; font-style: italic; color: #262B76;">A TichLabs Product Powered by Mama Tech</p>
     </div>
   </footer>
 

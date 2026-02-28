@@ -27,7 +27,7 @@
     .nav-menu { transition: all 0.3s ease-in-out; }
   </style>
 </head>
-<body class="font-sans">
+<body class="font-sans flex flex-col min-h-screen">
   <!-- Navigation -->
   <nav class="bg-white fixed w-full z-50 shadow-md" style="z-index: 1000;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -321,12 +321,26 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-100 py-6" style="border-top: 2px solid white;">
+  <footer class="bg-gray-100 py-6 mt-auto" style="border-top: 2px solid white;">
     <div class="max-w-7xl mx-auto text-center">
       <p class="text-sm sm:text-base" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
-      <p class="text-xs sm:text-sm text-danger font-bold" style="text-transform: uppercase; font-style: italic;">A TichLabs Product Powered by Mama Tech</p>
+      <p class="text-xs sm:text-sm" style="text-transform: uppercase; font-style: italic; color: #262B76;">A TichLabs Product Powered by Mama Tech</p>
     </div>
   </footer>
+
+  <!-- Make footer sticky -->
+  <script>
+    // Ensure footer sticks to bottom
+    document.addEventListener('DOMContentLoaded', function() {
+      const body = document.body;
+      const footer = document.querySelector('footer');
+      if (body.scrollHeight < window.innerHeight) {
+        footer.style.position = 'fixed';
+        footer.style.bottom = '0';
+        footer.style.width = '100%';
+      }
+    });
+  </script>
 
   <script>
     // Mobile menu toggle
