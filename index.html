@@ -79,26 +79,26 @@
   <div class="h-16"></div>
 
   <!-- Jumbotron / Carousel -->
-  <section id="jumbotron">
-    <div id="jumbotron-carousel" class="carousel slide" data-bs-ride="carousel">
+  <section id="jumbotron" class="h-[60vh] sm:h-[70vh] lg:h-[80vh]">
+    <div id="jumbotron-carousel" class="carousel slide h-full" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#jumbotron-carousel" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#jumbotron-carousel" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#jumbotron-carousel" data-bs-slide-to="2"></button>
         <button type="button" data-bs-target="#jumbotron-carousel" data-bs-slide-to="3"></button>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/danceintospace.github.io/images/Ondiege4.jpg" alt="two dancers on the floor" class="w-100" style="height: 50vh; object-fit: cover;">
+      <div class="carousel-inner h-full">
+        <div class="carousel-item active h-full">
+          <img src="/danceintospace.github.io/images/Ondiege4.jpg" alt="two dancers on the floor" class="w-100 h-100" style="height: 100%; object-fit: cover;">
         </div>
-        <div class="carousel-item">
-          <img src="/danceintospace.github.io/images/agwata_show_three.jpg" alt="one dancer sprinkling sand on another" class="w-100" style="height: 50vh; object-fit: cover;">
+        <div class="carousel-item h-full">
+          <img src="/danceintospace.github.io/images/agwata_show_three.jpg" alt="one dancer sprinkling sand on another" class="w-100 h-100" style="height: 100%; object-fit: cover;">
         </div>
-        <div class="carousel-item">
-          <img src="/danceintospace.github.io/images/duet_nyanam.jpg" alt="two dancers on stage heads touching" class="w-100" style="height: 50vh; object-fit: cover;">
+        <div class="carousel-item h-full">
+          <img src="/danceintospace.github.io/images/duet_nyanam.jpg" alt="two dancers on stage heads touching" class="w-100 h-100" style="height: 100%; object-fit: cover;">
         </div>
-        <div class="carousel-item">
-          <img src="/danceintospace.github.io/images/trio_nyanam.jpg" alt="two dancers on stage" class="w-100" style="height: 50vh; object-fit: cover;">
+        <div class="carousel-item h-full">
+          <img src="/danceintospace.github.io/images/trio_nyanam.jpg" alt="two dancers on stage" class="w-100 h-100" style="height: 100%; object-fit: cover;">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#jumbotron-carousel" data-bs-slide="prev">
@@ -113,12 +113,15 @@
   <!-- About Section -->
   <section id="about" class="py-12 sm:py-16 px-4">
     <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col lg:flex-row items-center gap-8">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         <div class="lg:w-1/2">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-primary">About Us</h2>
           <h3 class="text-lg italic font-semibold mb-4">Where Tradition Meets Contemporary Expression</h3>
-          <p class="text-sm sm:text-base text-gray-600 text-justify">
-            Dance Into Space is a vibrant hub for performing arts, celebrating the beauty of dance and theatre as tools for entertainment, education, and community connection. Rooted in the richness of traditional vocabularies and folk media, we've crafted a distinctive contemporary dance-theatre language. Through this innovative approach, we create performances that inspire, educate, and advocate for meaningful change. Dance Into Space (DIS) is a premier mixed-able performing arts company, focused on contemporary dance, under the artistic direction of Ondiege Matthew.
+          <p class="text-sm sm:text-base text-gray-600 text-justify mb-4">
+            Dance Into Space is a vibrant hub for performing arts, celebrating the beauty of dance and theatre as tools for entertainment, education, and community connection. Rooted in the richness of traditional vocabularies and folk media, we've crafted a distinctive contemporary dance-theatre language. Through this innovative approach, we create performances that inspire, educate, and advocate for meaningful change.
+          </p>
+          <p class="text-sm sm:text-base text-gray-600 text-justify mb-4">
+            Dance Into Space (DIS) is a premier mixed-able performing arts company, focused on contemporary dance, under the artistic direction of Ondiege Matthew.
           </p>
           <h3 class="text-xl font-bold mt-6 mb-2 text-primary">Mission</h3>
           <p class="text-sm sm:text-base text-gray-600">To train artists in dance theatre and produce high-quality works for entertainment, personal development and advocacy.</p>
@@ -126,11 +129,17 @@
           <p class="text-sm sm:text-base text-gray-600">To have a society where dance and theatre are embraced and utilized by everyone in all areas of life.</p>
         </div>
         <div class="lg:w-1/2 w-full">
-          <iframe width="100%" height="250" sm:height="350" lg:height="400" 
-                  src="https://www.youtube.com/embed/za3tJpHQwSI?si=21_U4S1e1aTXuyw0&loop=1&playlist=za3tJpHQwSI&autoplay=1&mute=1&?rel=0" 
-                  title="Nyanam SA Tour 2024" frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-2xl w-full"></iframe>
+          <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-lg">
+            <iframe 
+              src="https://www.youtube.com/embed/za3tJpHQwSI?si=21_U4S1e1aTXuyw0&loop=1&playlist=za3tJpHQwSI&autoplay=1&mute=1&rel=0" 
+              title="Nyanam SA Tour 2024" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen 
+              class="w-full h-full">
+            </iframe>
+          </div>
         </div>
       </div>
     </div>
