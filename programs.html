@@ -14,82 +14,10 @@
 </head>
 <body class="font-sans flex flex-col min-h-screen">
   <!-- Navigation -->
-  <nav class="bg-white fixed w-full z-50 shadow-md" style="z-index: 1000;">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0">
-          <a href="/danceintospace.github.io/">
-            <img src="/danceintospace.github.io/images/logo.jpeg" alt="Logo" class="h-12 sm:h-16 w-auto">
-          </a>
-        </div>
-        <div class="hidden md:flex items-center space-x-2 lg:space-x-4">
-          <a href="/danceintospace.github.io/" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Home</a>
-          <a href="/danceintospace.github.io/blog.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Blog</a>
-          <a href="/danceintospace.github.io/updates.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Updates</a>
-          <a href="/danceintospace.github.io/gallery.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Gallery</a>
-          <a href="/danceintospace.github.io/programs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Programs</a>
-          <a href="/danceintospace.github.io/dance-center.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Dance Center</a>
-          <a href="/danceintospace.github.io/faqs.html" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">FAQs</a>
-          <a href="/danceintospace.github.io/#contact" class="px-2 py-1 text-sm lg:text-base text-black hover:bg-gray-200 rounded transition">Contact</a>
-        </div>
-        <div class="md:hidden flex items-center">
-          <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900 p-2">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-      <div class="px-4 py-3 space-y-2">
-        <a href="/danceintospace.github.io/" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Home</a>
-        <a href="/danceintospace.github.io/blog.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Blog</a>
-        <a href="/danceintospace.github.io/updates.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Updates</a>
-        <a href="/danceintospace.github.io/gallery.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Gallery</a>
-        <a href="/danceintospace.github.io/programs.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Programs</a>
-        <a href="/danceintospace.github.io/dance-center.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Dance Center</a>
-        <a href="/danceintospace.github.io/faqs.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">FAQs</a>
-        <a href="/danceintospace.github.io/#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded">Contact</a>
-      </div>
-    </div>
-  </nav>
+  <div id="nav-placeholder"></div>
 
-    <div class="h-16 sm:h-20"></div>
-
-  <!-- Programs Section -->
-  <section class="py-12 sm:py-16 px-4" style="background-color: #ACA9BB;">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-primary">Community Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        
-        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
-          <img src="/danceintospace.github.io/images/duet4.png" alt="Breaking Barriers" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
-          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
-            <h3 class="font-semibold text-white text-lg">Breaking Barriers</h3>
-            <p class="text-sm text-white mt-2">Is a mixed ability dance and SRHR outreaches project in partnership with Amplify Change.</p>
-          </div>
-        </div>
-        
-        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
-          <img src="/danceintospace.github.io/images/corruption.jpg" alt="Jukumu Letu" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
-          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
-            <h3 class="font-semibold text-white text-lg">Jukumu Letu</h3>
-            <p class="text-sm text-white mt-2">Interactive Media Outreach Project in partnership with CRE-CO</p>
-          </div>
-        </div>
-        
-        <div class="group relative rounded overflow-hidden bg-black" style="height: 350px; min-height: 300px;">
-          <img src="/danceintospace.github.io/images/man-ball.png" alt="Dance Meets Roots" class="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-50 transition">
-          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
-            <h3 class="font-semibold text-white text-lg">Dance Meets Roots</h3>
-            <p class="text-sm text-white mt-2">Intercultural contemporary dance decentralization project</p>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
+  <!-- Social Icons -->
+  <div id="social-placeholder"></div>
 
   <!-- Database Programs -->
   <section class="py-12 sm:py-16 px-4">
@@ -101,13 +29,66 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-100 py-6 mt-auto" style="border-top: 2px solid white;">
-    <div class="max-w-7xl mx-auto text-center">
-      <p class="text-sm sm:text-base" style="color: #262B76">&copy; 2026 Dance Into Space. All Rights Reserved.</p>
-      <p class="text-xs sm:text-sm" style="text-transform: uppercase; font-style: italic; color: #262B76;">A TichLabs Product Powered by Mama Tech</p>
+  <!-- Community Projects Section -->
+  <section id="projects" class="py-16 lg:py-20 md:py-16 sm:py-12 px-4 md:px-8 sm:px-6" style="background-color: #ACA9BB;">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-4" style="color: #6F0114;">Community Projects</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-6 md:gap-10 lg:gap-12">
+        
+        <div class="group relative p-4 rounded overflow-hidden bg-black block" style="height: 500px;">
+          <img src="/danceintospace.github.io/images/duet4.png" alt="Breaking Barriers" class="absolute inset-0 w-full h-full object-cover opacity-75 transition-opacity group-hover:opacity-50">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative z-10 p-4">
+            <h3 class="font-semibold text-white">Breaking Barriers</h3>
+            <div class="mt-1 translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+              <p class="text-sm text-white mb-4 overflow-y-auto">
+                Is a mixed ability dance and SRHR outreaches project in partnership with Amplify Change.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative p-4 rounded overflow-hidden bg-black block" style="height: 500px;">
+          <img src="/danceintospace.github.io/images/corruption.jpg" alt="Jukumu Letu" class="absolute inset-0 w-full h-full object-cover opacity-75 transition-opacity group-hover:opacity-50">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative z-10 p-4">
+            <h3 class="font-semibold text-black">Jukumu Letu</h3>
+            <div class="mt-1 translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+              <p class="text-sm text-white mb-4 overflow-y-auto">
+                Jukumu Letu is the title of an Interactive Media Outreach Project (iMOP)
+                that emphasizes the use of new media forms to process and disseminate
+                information that would motivate citizens to participate in the implementation
+                of the constitution. <br> Dance Into Space together with civil society partners
+                implemented the project in Nairobi, Nakuru, Mombasa, and Makueni with local
+                artists and activists. In partnership with CRE-CO
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative p-4 rounded overflow-hidden bg-black block" style="height: 500px;">
+          <img src="/danceintospace.github.io/images/man-ball.png" alt="Dance Meets Roots" class="absolute inset-0 w-full h-full object-cover opacity-75 transition-opacity group-hover:opacity-50">
+          <div class="absolute inset-0 bg-black bg-opacity-75 opacity-0 transition-opacity group-hover:opacity-100"></div>
+          <div class="relative z-10 p-4">
+            <h3 class="font-semibold text-white">Dance Meets Roots</h3>
+            <div class="mt-1 translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+              <p class="text-sm text-white mb-4 overflow-y-auto" style="max-height: 400px;">
+                DMR is an intercultural contemporary dance decentralization project that has up-to-date brought
+                together a network of 19 active dance groups country-wide. <br>The main objective of DMR is to
+                decentralize contemporary dance by creating new groups, building new audiences, and creating
+                performance and training spaces in new areas. The project started with a successful
+                pilot phase between 2007-2009 in partnership with Arterial Network & Africalia Belgium.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
 
   <script>
     const SUPABASE_URL = 'https://alyeeqlwemcqtticapot.supabase.co';
@@ -127,7 +108,7 @@
           <div class="w-full sm:w-64 bg-white -mt-8 sm:-mt-10 shadow-lg rounded-lg overflow-hidden">
             <div class="py-3 text-center font-bold text-gray-800">${program.title || 'Untitled'}</div>
             <div class="py-2 px-3 bg-gray-100 text-center">
-              <span class="bg-gray-400 text-xs px-4 py-2 rounded uppercase font-bold text-black">Learn more</span>
+              <a href="/danceintospace.github.io/programs.html" class="bg-gray-400 text-xs px-4 py-2 rounded uppercase font-bold text-black hover:bg-indigo-900 hover:!text-white inline-block">Learn more</a>
             </div>
           </div>
         </div>
@@ -150,5 +131,8 @@
     
     document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
   </script>
+
+  <!-- Shared -->
+  <script src="/danceintospace.github.io/js/shared.js"></script>
 </body>
 </html>
