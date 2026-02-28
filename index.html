@@ -199,7 +199,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         
         <div class="flex flex-col items-center">
-          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('images/sex education.jpeg');"></div>
+          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('/danceintospace.github.io/images/sex education.jpeg');"></div>
           <div class="w-56 sm:w-64 bg-white -mt-8 sm:-mt-10 shadow-lg rounded-lg overflow-hidden">
             <div class="py-2 sm:py-3 text-center font-bold text-gray-800 text-sm sm:text-base">Community Outreach</div>
             <div class="py-2 px-3 bg-gray-100 text-center">
@@ -209,7 +209,7 @@
         </div>
         
         <div class="flex flex-col items-center">
-          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('images/duet.png');"></div>
+          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('/danceintospace.github.io/images/duet.png');"></div>
           <div class="w-56 sm:w-64 bg-white -mt-8 sm:-mt-10 shadow-lg rounded-lg overflow-hidden">
             <div class="py-2 sm:py-3 text-center font-bold text-gray-800 text-sm sm:text-base">Choreographic Creations</div>
             <div class="py-2 px-3 bg-gray-100 text-center">
@@ -219,7 +219,7 @@
         </div>
         
         <div class="flex flex-col items-center">
-          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('images/residency6.jpg');"></div>
+          <div class="w-full h-48 sm:h-56 md:h-64 rounded-lg shadow-md bg-cover bg-center" style="background-image: url('/danceintospace.github.io/images/residency6.jpg');"></div>
           <div class="w-56 sm:w-64 bg-white -mt-8 sm:-mt-10 shadow-lg rounded-lg overflow-hidden">
             <div class="py-2 sm:py-3 text-center font-bold text-gray-800 text-sm sm:text-base">Dance Classes & Trainings</div>
             <div class="py-2 px-3 bg-gray-100 text-center">
@@ -229,40 +229,6 @@
         </div>
         
       </div>
-    </div>
-  </section>
-
-  <!-- Blog Section -->
-  <section id="blog" class="py-12 sm:py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center text-primary">Blog</h2>
-      <div id="blog-posts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <p class="col-span-full text-gray-600 text-center">Loading blog posts...</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Updates Section -->
-  <section id="updates" class="py-12 sm:py-16">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center text-primary">Updates & Events</h2>
-      <div id="updates-list" class="space-y-4 max-w-3xl mx-auto">
-        <p class="text-gray-600 text-center">Loading updates...</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery Section -->
-  <section id="gallery" class="py-12 sm:py-16 bg-gray-100 px-4">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-primary">Gallery</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-        <div id="gallery-col-1" class="space-y-2 sm:space-y-4"></div>
-        <div id="gallery-col-2" class="space-y-2 sm:space-y-4"></div>
-        <div id="gallery-col-3" class="space-y-2 sm:space-y-4"></div>
-        <div id="gallery-col-4" class="space-y-2 sm:space-y-4"></div>
-      </div>
-      <p id="gallery-loading" class="text-gray-600 text-center mt-4">Loading gallery...</p>
     </div>
   </section>
 
@@ -377,76 +343,12 @@
     const SUPABASE_KEY = 'sb_publishable_wf4JGCogJQENREaZe4F_5w_x23Huhpe';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Load blog posts
-    async function loadBlogPosts() {
-      const { data } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false }).limit(6);
-      const container = document.getElementById('blog-posts');
-      if (!data || data.length === 0) {
-        container.innerHTML = '<p class="col-span-full text-gray-600 text-center">No blog posts yet.</p>';
-        return;
-      }
-      container.innerHTML = data.map(post => `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-          ${post.cover_image ? `<img src="${post.cover_image}" alt="${post.title}" class="w-full h-40 sm:h-48 object-cover">` : '<div class="w-full h-40 sm:h-48 bg-gray-200"></div>'}
-          <div class="p-4">
-            <h3 class="text-lg font-bold mb-2">${post.title || 'Untitled'}</h3>
-            <p class="text-gray-500 text-sm">${post.published_at ? new Date(post.published_at).toLocaleDateString() : ''}</p>
-            <p class="text-gray-600 mt-2 text-sm line-clamp-3">${post.content || ''}</p>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Load updates
-    async function loadUpdates() {
-      const { data } = await supabase.from('updates').select('*').order('event_date', { ascending: true });
-      const container = document.getElementById('updates-list');
-      if (!data || data.length === 0) {
-        container.innerHTML = '<p class="text-gray-600 text-center">No updates yet.</p>';
-        return;
-      }
-      container.innerHTML = data.map(update => `
-        <div class="border-l-4 border-primary bg-white p-4 rounded shadow">
-          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-            <div>
-              <h3 class="text-lg font-bold">${update.title || 'Untitled'}</h3>
-              <p class="text-gray-600">${update.content || ''}</p>
-              ${update.location ? `<p class="text-sm text-gray-500 mt-1">📍 ${update.location}</p>` : ''}
-            </div>
-            ${update.event_date ? `<span class="text-sm bg-gray-100 px-3 py-1 rounded whitespace-nowrap">${new Date(update.event_date).toLocaleDateString()}</span>` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Load gallery
-    async function loadGallery() {
-      const { data } = await supabase.from('gallery_items').select('*').order('created_at', { ascending: false });
-      if (!data || data.length === 0) {
-        document.getElementById('gallery-loading').textContent = 'No gallery items yet.';
-        return;
-      }
-      document.getElementById('gallery-loading').style.display = 'none';
-      const cols = [[], [], [], []];
-      data.forEach((item, i) => cols[i % 4].push(item));
-      cols.forEach((col, i) => {
-        document.getElementById(`gallery-col-${i + 1}`).innerHTML = col.map(item => `
-          <div>
-            ${item.image ? `<img class="w-full rounded-lg" src="${item.image}" alt="${item.title || ''}">` : ''}
-          </div>
-        `).join('');
-      });
-    }
-
     // Clear contact form
     document.getElementById("contactForm")?.addEventListener("submit", function () {
       setTimeout(() => this.reset(), 100);
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadBlogPosts();
-      loadUpdates();
-      loadGallery();
     });
   </script>
 </body>
